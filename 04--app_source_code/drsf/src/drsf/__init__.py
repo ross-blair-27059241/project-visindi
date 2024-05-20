@@ -12,6 +12,10 @@
 
 """ A package for programmatically building and maintaining a Detection & Response Strategic Framework (DRSF).
 
+Extended Summary
+----------------
+<!-- TODO: Content within this section remains a work in progress. -->
+
 Modules
 -------
 <!-- TODO: Content within this section remains a work in progress. -->
@@ -20,4 +24,11 @@ Sub-Packages
 ------------
 <!-- TODO: Content within this section remains a work in progress. -->
 
+Notes
+-----
+
+
 """
+
+from .drsf_doc_processor import *
+from .drsf import *

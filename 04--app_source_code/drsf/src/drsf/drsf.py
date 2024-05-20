@@ -10,9 +10,12 @@
 # =============================================================================
 
 
-""" A module for defining the DRSF object and its functions.
+""" A module for defining the DRSF object and its methods.
 
-<!-- TODO: Content within this section remains a work in progress. -->
+Extended Summary
+----------------
+The primary object of the DRSF codebase, 
+
 
 """
 
