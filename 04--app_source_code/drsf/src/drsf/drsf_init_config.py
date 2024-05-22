@@ -24,13 +24,13 @@ formatted configuration file specified by the caller code.
 """
 
 # Python Standard Library Imports
-import tomllib
 import os
 
 # Other Python Library Imports
+# None
 
 # DRSF Codebase Module Imports
-import 
+from .drsf_core_config import *
 
 
 
@@ -53,7 +53,7 @@ class DRSFInitConfig():
                  drsf_source_docs_dev_dir: str="", drsf_source_docs_staging_dir: str="",
                  drsf_source_docs_build_dir: str=""):
 
-        self._drsf_core_config = self.DRSF_CORE_CONFIG
+        self.__drsf_core_config = DRSFCoreConfig().config_dict
         self._drsf_entry_templates_dir = drsf_entry_templates_dir
         self._drsf_source_docs_template_dir = drsf_source_docs_template_dir
         self._drsf_source_docs_dev_dir = drsf_source_docs_dev_dir
@@ -66,11 +66,6 @@ class DRSFInitConfig():
 
     @property
     def drsf_entry_templates_dir(self):
-        if self.drsf_entry_templates_dir == "":
-            raise AttributeError("The `drsf_entry_templates_dir` directory is currently designated as an empty string.  This attribute's value must define a valid relative file path to a directory containing template files for DRSF entries.  Otherwise critical DRSF functions will fail.")
-        elif os.path.exists(os.path.join(os.getcwd(), self.drsf_entry_templates_dir)) != True:
-            raise AttributeError("The `drsf_entry_templates_dir` directory does not exist.  This attribute's value must define a valid relative file path to a directory containining template files for DRSF entries.  Otherwise critical DRSF functions will fail.")
-        else:
             return self._drsf_entry_templates_dir
     
     @drsf_entry_templates_dir.setter
@@ -84,47 +79,67 @@ class DRSFInitConfig():
 
     @property
     def drsf_source_docs_template_dir(self):
-        """ A "getter" method for the DRSF's template-source-docs-directory.
+        return self.drsf_source_docs_template_dir
+
+    @drsf_source_docs_template_dir.setter
+    def drsf_source_docs_template_dir(self, input_dir):
+        """ A "setter" method for the DRSF's template-source-docs-directory.
 
         Notes
         -----
-        Unlike the other attributes of the DRSF object that designate important source document directories, you don't necessarily require a template-source-document-directory when instantiating and working with a DRSF.  For example, if you've already created a "DEV" source document directory that the DRSF is being instantiated from, and you have no need to "start from scratch" and re-build that DEV directory, then you'd have no need of this template directory.  Therefore we are not going to raise an AttributeError in the case of an empty string being supplied to our "getter" method.
-
+        Unlike the other attributes of the DRSF object that designate important source document directories, you don't necessarily require a template-source-document-directory when instantiating and working with a DRSF.  For example, if you've already created a "DEV" source document directory that the DRSF is being instantiated from, and you have no need to "start from scratch" and re-build that DEV directory, then you'd have no need of this template directory.  Therefore we are not going to raise an ValueError in the case of an empty string being supplied to this "setter" method.
 
         """
-        if os.path.exists(os.path.join(os.getcwd(), self.drsf_source_docs_template_dir)) != True:
-            raise AttributeError("The currently designated `drsf_source_docs_template_dir` directory does not exist.  This attribute's value must define a valid relative file path to a directory that serves as the template for building the DRSF's \"DEV\" directory.  Otherwise critical DRSF functions will fail.")
+        if os.path.exists(os.path.join(os.getcwd(), input_dir)) != True:
+            raise ValueError("The directory-file-path input to this function does not exist.  This attribute's value must define a valid relative file path to a directory that serves as the template for building the DRSF's \"DEV\" directory.  Otherwise critical DRSF functions will fail.")
         else:
-            return self.drsf_source_docs_template_dir
+            self._drsf_source_docs_template_dir = input_dir
 
-    @property.setter
-    def drsf_source_docs_template_dir(self, input_dir):
+    @property
+    def drsf_source_docs_dev_dir(self):
+        return self._drsf_source_docs_dev_dir
+
+    @drsf_source_docs_dev_dir.setter
+    def drsf_source_docs_dev_dir(self, input_dir):
         if input_dir == "":
-            raise ValueError("The directory-file-path input to this function is an empty string.  This value must define a valid relative path to a directory containing the myst-markdown-formatted source documents that comprise the DRSF's entries and documentation book.  Otherwise critical DRSF functions will fail.")
-        elif os.path.exists(os.path.join(os.getcwd(), self))
-        pass
+            raise ValueError("The directory-file-path input to this function is an empty string.  This value must define a valid relative file path to a directory containing the myst-markdown-formatted source documents that the DRSF is instantiated from.  Otherwise critical DRSF functions will fail.")
+        elif os.path.exists(os.path.join(os.getcwd(), input_dir)) != True:
+            raise ValueError("The directory-file-path input to this function does not exist.  This value must define a valid relative file path to a directory containing the myst-markdown-formatted source documents that the DRSF is instantiated from.  Otherwise critical DRSF functions will fail.")
+        else:
+            self._drsf_source_docs_dev_dir = input_dir
 
     @property
-    def drsf_source_docs_dev_dir():
-        pass
+    def drsf_source_docs_staging_dir(self):
+        return self._drsf_source_docs_staging_dir
 
-    @property.setter
-    def drsf_source_docs_dev_dir():
-        pass
+    @drsf_source_docs_staging_dir.setter
+    def drsf_source_docs_staging_dir(self, input_dir):
+        """ A "setter" method for the DRSF's staging-source-docs-directory.
+
+        Notes
+        -----
+        The DRSF codebase is designed to create new directories for a DRSF's "STAGING" and "BUILD" directories automatically, or overwrite these directories if they already exist.  Therefore while an empty string should result in a ValueError, if the input directory-file-path does not yet exist that is not a problem and no error should be raised.
+        
+        """
+        if input_dir == "":
+            raise ValueError("The directory-file-path input to this function is an empty string.  This value must define a valid relative file path to a target directory where the DRSF can generate the \"STAGING\" versions of its myst-markdown-formatted source documents.  Otherwise critical DRSF functions will fail.")
+        else:
+            self._drsf_source_docs_staging_dir = input_dir
 
     @property
-    def drsf_source_docs_staging_dir():
-        pass
+    def drsf_source_docs_build_dir(self):
+        return self._drsf_source_docs_build_dir
 
-    @property.setter
-    def drsf_source_docs_staging_dir():
-        pass
+    @drsf_source_docs_build_dir.setter
+    def drsf_source_docs_build_dir(self, input_dir):
+        """ A "setter" method for the DRSF's build-source-docs-directory.
 
-    @property
-    def drsf_source_docs_build_dir():
-        pass
-
-    @property.setter
-    def drsf_source_docs_build_dir():
-        pass
-
+        Notes
+        -----
+        The DRSF codebase is designed to create new directories for a DRSF's "STAGING" and "BUILD" directories automatically, or overwrite these directories if they already exist.  Therefore while an empty string should result in a ValueError, if the input directory-file-path does not yet exist that is not a problem and no error should be raised.
+        
+        """
+        if input_dir == "":
+            raise ValueError("The directory-file-path input to this function is an empty string.  This value must define a valid relative file path to a target directory where the DRSF can generate the \"BUILD\" versions of its myst-markdown-formatted source documents as well as the final output publication documents.  Otherwise critical DRSF functions will fail.")
+        else:
+            self._drsf_source_docs_build_dir = input_dir

@@ -29,6 +29,3 @@ Notes
 
 
 """
-
-from .drsf_doc_processor import *
-from .drsf import *
