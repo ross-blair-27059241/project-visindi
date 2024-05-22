@@ -23,14 +23,16 @@ formatted configuration file specified by the caller code.
 
 """
 
-# Python Standard Library Imports
+# Python-Standard-Library Codebase Imports
 import os
 
-# Other Python Library Imports
+# Third-Party Codebase Imports
 # None
 
-# DRSF Codebase Module Imports
-from .drsf_core_config import *
+# Local Application Codebase Imports
+# - Using "relative import" syntax specifying the relative file paths
+#   of the target packages and/or modules.
+from .drsf_core_config import DRSFCoreConfig
 
 
 
@@ -79,7 +81,7 @@ class DRSFInitConfig():
 
     @property
     def drsf_source_docs_template_dir(self):
-        return self.drsf_source_docs_template_dir
+        return self._drsf_source_docs_template_dir
 
     @drsf_source_docs_template_dir.setter
     def drsf_source_docs_template_dir(self, input_dir):
