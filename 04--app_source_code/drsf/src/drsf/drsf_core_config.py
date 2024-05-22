@@ -11,6 +11,17 @@
 
 
 
+# Python-Standard-Library Imports
+# None
+
+# Third-Party Import Statements
+# None
+
+# Local Application Imports
+# None
+
+
+
 class DRSFCoreConfig():
 
     # Definition of class-level attributes.
@@ -265,5 +276,5 @@ class DRSFCoreConfig():
         self.__config_dict = self.DRSF_CORE_CONFIG
     
     @property
-    def config(self):
+    def config_dict(self):
         return self.__config_dict
