@@ -1,0 +1,54 @@
+#                 COPYRIGHT & LICENSE TERMS NOTICE
+# =============================================================================
+# All following code and content is © 2024 Ross Blair,
+# and falls under the licensing terms of Ross Blair's
+# derivative of the Business Source License \(BSL\).
+# The precise license and warranty terms of the BSL can be found in the file 
+# `LICENSE.BSL.md`, which should have been distributed
+# along with this code file.  All other use of original-work code and content
+# falling outside of this BSL license is prohibited.
+# =============================================================================
+
+
+
+#                       DRSF CONFIGURATION TOML FILE
+# =============================================================================
+# This file is configurable by the end-user of the DRSF codebase.  The sections
+# that follow contain important user-configurable variables that will affect
+# the runtime execution of the DRSF program.  Please carefully read the comments
+# for each configurable field.
+# =============================================================================
+
+
+[source_doc_templates]
+# The relative file path of the "DRSF Source Documents Template Directory".
+# This directory serves as the template Jupyter Book directory for the
+# DRSF codebase when we are instantiating a brand new DRSF from scratch.
+DRSF_SOURCE_DOCS_TEMPLATE_DIR = "./00-drsf_source_docs_template_dir"
+
+# The relative file path of the directory containing the template files for
+# instantiating new DRSF entry source documents.
+DRSF_ENTRY_TEMPLATES_DIR = "./00-drsf_entry_markdown_templates"
+
+
+[source_doc_ops_directories]
+# The relative file path of the target directory where you would like to write
+# the "DEV" directory for your DRSF source documents.  Note that this directory
+# will serve as your primary workspace when creating and documenting new DRSF
+# entries and creating other chapters in your DRSF (e.g. a chapter detailing
+# IR playbooks for certain adverse events).
+#   * If you create a new DRSF from scratch, this directory will be
+#     automatically created for you.
+DRSF_SOURCE_DOCS_DEV_DIR = "./DRSF_Source_Docs_DEV"
+
+# The relative file path of the target directory that will serve as your DRSF's
+# "STAGING" directory.  This directory contains "staging" drafts of your DRSF
+# source documents, so that their contents can be reviewed before executing the
+# final DRSF documentation build that creates the official DRSF Jupyter Book.
+DRSF_SOURCE_DOCS_STAGING_DIR = "./DRSF_Source_Docs_STAGING"
+
+# The relative file path of the target directory will contain the final "BUILD"
+# source documents for your DRSF.
+DRSF_SOURCE_DOCS_BUILD_DIR = "./DRSF_Source_Docs_BUILD"
+
+
