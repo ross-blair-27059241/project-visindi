@@ -51,6 +51,7 @@ class DRSFInitConfig():
     """
 
     # Definition of the `__init__()` constructor method and instance-level attributes.
+    # Note the use of optional parameters here.
     def __init__(self, drsf_entry_templates_dir: str="", drsf_source_docs_template_dir: str="",
                  drsf_source_docs_dev_dir: str="", drsf_source_docs_staging_dir: str="",
                  drsf_source_docs_build_dir: str=""):
